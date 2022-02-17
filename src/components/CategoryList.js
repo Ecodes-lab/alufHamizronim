@@ -3,12 +3,18 @@ import {
   View,
   Text,
   Button,
+  Image,
   FlatList,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 // import translate from "../services/translation";
+
+// const screenWidth = Dimensions.get("window").width;
+// const numColumns = 2;
+// const tileSize = screenWidth / numColumns - 15;
 
 const CategoryList = ({ navigation, categories }) => {
   const [color, setColor] = useState("");
@@ -49,12 +55,14 @@ const CategoryList = ({ navigation, categories }) => {
             <TouchableOpacity
               key={category.item.id}
               style={styles.categoryStyle}
-              onPress={() =>
+              onPress={() => {
+                // console.log(category.item.catId);
                 navigation.navigate("Products", {
-                  categoryId: category.item.id,
-                })
-              }
+                  categoryId: category.item.catId,
+                });
+              }}
             >
+              <Image style={styles.iconStyle} source={category.item.icon} />
               <Text style={styles.titleStyle}>{category.item.name}</Text>
             </TouchableOpacity>
             //   <Text style={styles.titleStyle} key={category.item.id}>
@@ -63,6 +71,12 @@ const CategoryList = ({ navigation, categories }) => {
           );
         }}
         keyExtractor={(category) => category.id}
+        // numColumns={2}
+        // onEndReachedThreshold={0.01}
+        // onEndReached={(info) => {
+        //   loadMoreResults(info);
+        // }}
+        // ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
       />
     </View>
     // <FlatList
@@ -106,6 +120,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   categoryStyle: {
+    // marginRight: 10,
+    // width: tileSize,
+
     // flex: 0.5,
     // justifyContent: "center",
     // alignSelf: "center",
@@ -126,8 +143,15 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     padding: 20,
     borderRadius: 10,
+    alignItems: "center",
     // height: 100,
     // width: 200,
+  },
+  iconStyle: {
+    width: 50,
+    height: 50,
+    // borderRadius: 4,
+    // marginBottom: 5,
   },
   titleStyle: {
     // alignSelf: "center",

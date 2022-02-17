@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   Dimensions,
   StyleSheet,
   SafeAreaView,
+  ActivityIndicator,
 } from "react-native";
 import ProductDetails from "./ProductDetails";
 
@@ -14,9 +15,20 @@ const screenWidth = Dimensions.get("window").width;
 const numColumns = 2;
 const tileSize = screenWidth / numColumns - 25;
 
-const ProductList = ({ navigation, title, products }) => {
+const ProductList = ({
+  navigation,
+  title,
+  products,
+  loadMoreResults,
+  isLoading,
+}) => {
+  // const [data, setData] = useState([])
   if (!products.length) {
     return null;
+  }
+
+  if (isLoading) {
+    return <ActivityIndicator />;
   }
   return (
     <SafeAreaView style={[styles.container, {}]}>
@@ -38,6 +50,7 @@ const ProductList = ({ navigation, title, products }) => {
                   onPress={() =>
                     navigation.navigate("ProductDetail", {
                       productId: item.id,
+                      relatedProducts: item.related_ids,
                     })
                   }
                 >
@@ -50,7 +63,11 @@ const ProductList = ({ navigation, title, products }) => {
             }}
             keyExtractor={(product) => product.id}
             numColumns={2}
-            // ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+            onEndReachedThreshold={0.01}
+            onEndReached={(info) => {
+              loadMoreResults(info);
+            }}
+            ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
           />
         ) : null}
       </View>

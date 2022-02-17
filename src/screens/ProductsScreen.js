@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Button, FlatList, StyleSheet } from "react-native";
 import SearchBar from "../components/SearchBar";
 import aluf from "../api/aluf";
@@ -10,39 +10,54 @@ import CategoryList from "../components/CategoryList";
 
 const ProductsScreen = ({ route, navigation }) => {
   const [term, setTerm] = useState("");
+  const [page, setPage] = useState(1);
+  // const [product, setProduct] = useState(null);
   // const [allCategoryApi, parentCategoryApi, categories, catErrorMessage] =
   // useCategories();
-  const [productApi, products, productCategories, errorMessage] = useProducts();
+  const [
+    productApi,
+    productByCategoryApi,
+    products,
+    productsByTerm,
+    isLoading,
+    errorMessage,
+  ] = useProducts();
 
   const { categoryId } = route.params;
 
-  const filterProductsByCategory = (catId) => {
-    return products.filter((product) => {
-      // console.log(product.categories.id);
-      return product.categories.filter((category) => {
-        // console.log(categoryId);
-        if (category.id === catId) {
-          // console.log(categoryId);
-        }
-        return category.id === catId;
-      });
-    });
-    // productCategories.map((category) => {
-    //   console.log(category);
-    // });
-    // return productCategories.filter((category) => {
-    //   return products.filter(product => {
-    //     // return product.
-    //   })
-    // });
+  const loadMoreResults = () => {
+    if (!term) {
+      setPage(page + 1);
+    }
   };
 
+  useEffect(() => {
+    if (!term) {
+      productByCategoryApi(page, categoryId == -1 ? "" : categoryId, "", false);
+    }
+    const interval = setInterval(() => {
+      // console.log("This will run every second!");
+      // setTerm(term);
+      if (!term) {
+        productByCategoryApi(
+          page,
+          categoryId == -1 ? "" : categoryId,
+          "",
+          true
+        );
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [page]);
+
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <SearchBar
         term={term}
         onTermChange={(newTerm) => setTerm(newTerm)}
-        onTermSubmit={() => productApi(term)}
+        onTermSubmit={() =>
+          productByCategoryApi(page, categoryId == -1 ? "" : categoryId, term)
+        }
       />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
       {/* <Text>We have found {categories.length} results</Text> */}
@@ -69,8 +84,12 @@ const ProductsScreen = ({ route, navigation }) => {
       {/* {filterProductsByCategory()} */}
       {/* <CategoryList results={categories} /> */}
       <ProductList
-        products={filterProductsByCategory(categoryId)}
+        // products={filterProductsByCategory(categoryId)}
+        products={productsByTerm.length === 0 ? products : productsByTerm}
+        // products={products}
+        isLoading={isLoading}
         navigation={navigation}
+        loadMoreResults={loadMoreResults}
       />
       {/* <ResultsList results={filterProductsByCategory()} title="Beds" /> */}
       {/* <ResultsList results={filterProductsByCategory()} title="Bedrooms" /> */}

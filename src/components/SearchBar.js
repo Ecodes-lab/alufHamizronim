@@ -1,11 +1,13 @@
 import React from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { Feather } from "react-native-vector-icons";
 
 const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
   return (
     <View style={styles.backgroundStyle}>
-      <Feather name="search" style={styles.iconStyle} />
+      <TouchableOpacity style={styles.iconContainer} onPress={onTermSubmit}>
+        <Feather name="search" style={styles.iconStyle} />
+      </TouchableOpacity>
       <TextInput
         autoCapitalize="none"
         autoCorrect={false}
@@ -14,6 +16,8 @@ const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
         value={term}
         onChangeText={onTermChange}
         onEndEditing={onTermSubmit}
+        // returnKeyLabel="search"
+        returnKeyType="search"
       />
     </View>
   );
@@ -36,9 +40,11 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
   },
+  iconContainer: {
+    alignSelf: "center",
+  },
   iconStyle: {
     fontSize: 35,
-    alignSelf: "center",
     marginHorizontal: 15,
   },
 });
