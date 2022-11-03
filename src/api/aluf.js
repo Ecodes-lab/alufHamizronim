@@ -1,11 +1,10 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://mizranim-deal.co.il/wp-json/wc/v3",
+  baseURL: "[API_BASE_URL]",
   params: {
-    consumer_key: "ck_6d1006dc645f8728cac052245f267b718e323420",
-    consumer_secret: "cs_9b5fb623ade86e15af0f8ff7ca430af11088793c",
+    consumer_key: "[CONSUMER_KEY]",
+    consumer_secret: "[CONSUMER_SECRET]",
   },
 });
 
-// ?consumer_key=ck_6d1006dc645f8728cac052245f267b718e323420&consumer_secret=cs_9b5fb623ade86e15af0f8ff7ca430af11088793c
