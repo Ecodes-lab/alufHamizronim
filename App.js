@@ -71,25 +71,7 @@ const App = () => {
 
   useEffect(() => {
     // // Initialize Firebase
-    // const firebaseConfig = {
-    //   // apiKey: "AIzaSyBq0t2MShV5ZYbU5pI31ATu7Yl0zJFkreo",
-    //   // authDomain: "test-6e23c.firebaseapp.com",
-    //   // databaseURL: "https://test-6e23c-default-rtdb.firebaseio.com/",
-    //   // projectId: "test-6e23c",
-    //   // storageBucket: "project-id.appspot.com",
-    //   // messagingSenderId: "sender-id",
-    //   // appId: "app-id",
-    //   // measurementId: "G-measurement-id",
-
-    //   apiKey: "AIzaSyBq0t2MShV5ZYbU5pI31ATu7Yl0zJFkreo",
-    //   authDomain: "test-6e23c.firebaseapp.com",
-    //   databaseURL: "https://test-6e23c-default-rtdb.firebaseio.com/",
-    //   projectId: "test-6e23c",
-    //   storageBucket: "test-6e23c.appspot.com",
-    //   messagingSenderId: "1012705952654",
-    //   appId: "1:1012705952654:web:b16a46f9050c15c468dadf",
-    //   measurementId: "G-7Q4XPS9VFN",
-    // };
+    
     firebase();
     // initializeApp(firebaseConfig);
 
@@ -159,27 +141,7 @@ const App = () => {
     // ></ModalPopup>;
     if (notification) {
       setModalVisible(true);
-
-      //   Alert.alert(
-      //     notification.request.content.title,
-      //     notification.request.content.body,
-      //     [
-      //       {
-      //         text: "Cancel",
-      //         onPress: () => console.log("Cancel Pressed"),
-      //         style: "cancel",
-      //       },
-      //       {
-      //         text: "Check it Out",
-      //         onPress: () => {
-      //           Linking.openURL(notification.request.content.data.product_url);
-      //         },
-      //       },
-      //     ]
-      //   );
     }
-    // sendPushNotification(expoPushToken);
-    // console.log(notification && notification.request.content.title);
   }, [notification]);
 
   // const sources = html.match(/<img [^>]*src="[^"]*"[^>]*>/gm).map(x => x.replace(/.*src="([^"]*)".*/, '$1'));
