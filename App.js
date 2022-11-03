@@ -246,29 +246,6 @@ async function sendPushNotification(expoPushToken) {
     body: "And here is the body!",
     data: { someData: "goes here" },
   };
-
-  // await fetch(
-  //   `https://mizranim-deal.co.il?lceps_key=61f0fc9bdba0f&add_token=${expoPushToken}`,
-  //   {
-  //     method: "GET",
-  //     // headers: {
-  //     //   Accept: "application/json",
-  //     //   "Accept-encoding": "gzip, deflate",
-  //     //   "Content-Type": "application/json",
-  //     // },
-  //     // body: JSON.stringify(message),
-  //   }
-  // );
-
-  // await fetch("https://exp.host/--/api/v2/push/send", {
-  //   method: "POST",
-  //   headers: {
-  //     Accept: "application/json",
-  //     "Accept-encoding": "gzip, deflate",
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(message),
-  // });
 }
 
 async function registerForPushNotificationsAsync() {
@@ -286,28 +263,7 @@ async function registerForPushNotificationsAsync() {
       return;
     }
     token = (await Notifications.getDevicePushTokenAsync()).data;
-    // token = (await Notifications.getExpoPushTokenAsync()).data;
-    // console.log(token);
-
-    // function storeHighScore(userId, score) {
-    // const db = getDatabase();
-    // const reference = ref(db);
-    // update(reference, [token]);
-    // }
-    // let uid = firebase.auth().currentUser
-    // await fetch(
-    //   `https://mizranim-deal.co.il?lceps_key=61f0fc9bdba0f&add_token=${token}`,
-    //   {
-    //     method: "POST",
-    //     // headers: {
-    //     //   Accept: "application/json",
-    //     //   "Accept-encoding": "gzip, deflate",
-    //     //   "Content-Type": "application/json",
-    //     // },
-    //     // body: JSON.stringify(message),
-    //   }
-    // );
-    // https://mizranim-deal.co.il?lceps_key=61f0fc9bdba0f&add_token=THE-TOKEN
+    
   } else {
     alert("Must use physical device for Push Notifications");
   }
@@ -325,18 +281,7 @@ async function registerForPushNotificationsAsync() {
 }
 
 async function storeToken(token) {
-  // await fetch(
-  //   `https://mizranim-deal.co.il?lceps_key=61f0fc9bdba0f&add_token=${token}`,
-  //   {
-  //     method: "POST",
-  //     // headers: {
-  //     //   Accept: "application/json",
-  //     //   "Accept-encoding": "gzip, deflate",
-  //     //   "Content-Type": "application/json",
-  //     // },
-  //     // body: JSON.stringify(message),
-  //   }
-  // );
+ 
   const userId = uuidv4();
   const db = database.getDatabase();
   // const reference = database.ref(db, "tokens");
@@ -371,92 +316,7 @@ async function storeToken(token) {
     // error reading value
   }
 
-  // let tokens = [];
-  // // console.log(id);
-  // database.get(database.ref(db, "tokens")).then((snapshot) => {
-  //   // const
-  //   // console.log(snapshot.);
-  //   if (snapshot != null) {
-  //     snapshot.forEach((value) => {
-  //       if (token != value.val()) {
-  //         // console.log(value.val());
-  //         // tokens.push(token);
-  //         // set(newTokenRef, token);
-  //       }
-  //     });
-  //   } else {
-  //     // set(newTokenRef, token);
-  //   }
-
-  //   // set(reference, [token]);
-  // });
-
-  // tokens.push(token)
-  // set(newTokenRef, token).then;
-
-  // console.log(newTokenRef.isEqual("-MuPUI5pDwu3Yl2UAFAg"));
-
-  // console.log(database.ref(db, "tokens"));
-  // onValue(reference, (snapshot) => {
-  //   // const data = snapshot.val();
-  //   // console.log(snapshot);
-  //   const ref = snapshot.child("tokens");
-
-  //   ref.forEach((v) => {
-  //     console.log(v.val() == token);
-  //     if(v.val() != token){
-  //       set(ref, [...v.val(), token])
-  //     }
-  //   });
-
-  //   // if (snapshot !== null) {
-  //   //   // snapshot.forEach((value) => {
-  //   //   //   console.log(value);
-  //   //   //   // if (token !== value.val()) {
-  //   //   //   //   console.log(value.val());
-  //   //   // set(reference, [token]);
-  //   //   //   // }
-  //   //   // });
-  //   // } else {
-  //   // set(ref, [token]);
-  //   // }
-
-  //   // console.log(snapshot.key);
-
-  //   // if (!snapshot.exists()) {
-  //   //   set(newTokenRef, token);
-  //   //   // return;
-
-  //   //   // tokens.push()
-  //   // }
-
-  //   // console.log(...data);
-  //   // data.forEach((d) => {
-  //   //   tokens.push(d);
-  //   // });
-
-  //   // update(reference, [data]);
-  //   // updateToken(postElement, data);
-  // });
-
-  // tokens.push(token);
-  // console.log(tokens);
-  // set(newTokenRef, tokens);
-  // push(reference).then((r) => {
-  //   // console.log(r.key == newTokenRef.key);
-  // });
-
-  // tokens.push(token);
-  // set(reference, tokens);
-  // get(reference).then((data) => {
-  //   data.child().val()
-  // });
-  // if (tokens == 0)
-  // set(newTokenRef, token);
-  // const reference = ref(db, 'users/' + userId);
-  // set(reference, {
-  //   token: token,
-  // });
+ 
 }
 
 export default () => {
